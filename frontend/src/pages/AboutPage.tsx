@@ -1,0 +1,17 @@
+import { Database, Gauge, ShieldCheck, type LucideIcon } from 'lucide-react'
+import TopBar from '../components/TopBar'
+
+const cards: { title: string; icon: LucideIcon; text: string }[] = [
+  { title: 'Data provenance', icon: Database, text: 'Official Elexon BMRS FUELHH actuals and WINDFOR forecasts only.' },
+  { title: 'Decision discipline', icon: ShieldCheck, text: 'Only the latest forecast published at or before the configured D-1 cutoff enters primary metrics.' },
+  { title: 'Transparent metrics', icon: Gauge, text: 'MAE, RMSE, signed bias, and guarded percentage error with observation counts.' },
+]
+
+const AboutPage = () => <div className="min-h-screen" style={{ background: 'var(--bg-main)' }}><TopBar /><main className="p-6" style={{ maxWidth: 1100, margin: '0 auto' }}>
+  <header className="mb-7"><div style={{ color: 'var(--accent-gold)', fontSize: 10, letterSpacing: '.16em', textTransform: 'uppercase' }}>About WindSight</div><h1 className="font-serif" style={{ fontSize: 42, margin: '10px 0 8px' }}>Know the wind. Plan the power.</h1><p style={{ color: 'var(--text-muted)', maxWidth: 700, lineHeight: 1.7 }}>GridBricks WindSight turns historical wind forecasts into a clear procurement review: what was knowable before the day-ahead decision, what actually happened, and how large the error was.</p></header>
+  <section className="grid gap-4 mb-5" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))' }}>{cards.map(({ title, icon: Icon, text }) => <div className="card p-5" key={title}><Icon size={20} style={{ color: 'var(--accent-gold)' }} /><h2 style={{ fontSize: 16 }}>{title}</h2><p style={{ color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.6 }}>{text}</p></div>)}</section>
+  <section className="card p-6"><h2 style={{ fontSize: 18, marginTop: 0 }}>Methodology and scope</h2><div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))' }}><div><h3 style={{ fontSize: 13, color: 'var(--accent-gold)' }}>Data sources</h3><p style={{ color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.7 }}>FUELHH provides 30-minute WIND actual generation. WINDFOR provides hourly forecast records and publication revisions. All timestamps are normalized to UTC and the analysis is limited to January 2026 delivery periods.</p><h3 style={{ fontSize: 13, color: 'var(--accent-gold)' }}>Matching</h3><p style={{ color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.7 }}>Each half-hour actual maps to its containing WINDFOR hour. Duplicate records and invalid numeric/timestamp values are removed explicitly.</p></div><div><h3 style={{ fontSize: 13, color: 'var(--accent-gold)' }}>Metrics</h3><p style={{ color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.7 }}>Error is forecast minus actual. Positive bias means over-forecasting. MAE and RMSE are in MW. MAPE excludes actuals below 100 MW because that denominator is not meaningful.</p><h3 style={{ fontSize: 13, color: 'var(--accent-gold)' }}>Limitations</h3><p style={{ color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.7 }}>The cutoff is configurable and should be confirmed for the purchasing process being represented. Actual generation is retrospective. API availability and missing historical observations can reduce coverage.</p></div></div></section>
+  <footer style={{ color: 'var(--text-dim)', fontSize: 11, marginTop: 22 }}>Deterministic analytics only. No AI, machine learning, weather API, or additional dataset is used.</footer>
+</main></div>
+
+export default AboutPage

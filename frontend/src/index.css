@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+/* ============================================================
+   GridBricks WindSight Design System
+   ============================================================ */
+
+:root {
+  /* Color Palette */
+  --bg-main: #071321;
+  --bg-sidebar: #050D17;
+  --bg-card: #0E1C2D;
+  --bg-card-secondary: #14263A;
+  --bg-card-hover: #192F47;
+  
+  --accent-gold: #DDBB78;
+  --accent-gold-muted: #B89A55;
+  --accent-gold-dim: rgba(221, 187, 120, 0.15);
+  
+  --text-primary: #F4F0E8;
+  --text-muted: #9BA9B9;
+  --text-dim: #6B7A8D;
+  
+  --color-positive: #83B9A5;
+  --color-positive-dim: rgba(131, 185, 165, 0.15);
+  --color-warning: #D88F79;
+  --color-warning-dim: rgba(216, 143, 121, 0.15);
+  
+  --border-subtle: rgba(100, 130, 170, 0.15);
+  --border-card: rgba(100, 130, 170, 0.12);
+  
+  /* Spacing */
+  --sidebar-width: 108px;
+  
+  /* Chart colors */
+  --chart-forecast: #DDBB78;
+  --chart-actual: #83B9A5;
+  --chart-error: #D88F79;
+  --chart-grid: rgba(100, 130, 170, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-sidebar);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold-muted);
+}
+
+/* Typography */
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.font-mono {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Glass surface */
+.glass {
+  background: rgba(14, 28, 45, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Card styles */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+}
+
+.card-secondary {
+  background: var(--bg-card-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+}
+
+/* Gold accent border */
+.border-gold {
+  border-color: var(--accent-gold);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-card) 25%,
+    var(--bg-card-secondary) 50%,
+    var(--bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+/* Status indicators */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot.ok { background: var(--color-positive); }
+.status-dot.warning { background: var(--accent-gold); }
+.status-dot.error { background: var(--color-warning); }
+.status-dot.loading { 
+  background: var(--accent-gold);
+  animation: pulse-gold 1.5s ease-in-out infinite;
+}
+
+/* Number display */
+.metric-value {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Hover transitions */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Tooltip base */
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+
+/* Nav item */
+.nav-item {
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.nav-item:hover {
+  background: rgba(221, 187, 120, 0.08);
+}
+.nav-item.active {
+  background: rgba(221, 187, 120, 0.12);
+  border-right: 2px solid var(--accent-gold);
+}
