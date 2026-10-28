@@ -63,6 +63,8 @@ The frontend is served at <http://localhost:5173>; its Nginx proxy routes
 browser API requests to the backend service. The backend remains available at
 <http://localhost:8000>.
 
+**Live Demo:** <https://q7m2xk.vercel.app>
+
 ## Data and assumptions
 
 Sources: [Elexon FUELHH](https://bmrs.elexon.co.uk/api-documentation/endpoint/datasets/FUELHH/stream)
